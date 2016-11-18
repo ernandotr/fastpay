@@ -1,0 +1,32 @@
+{
+  "name": "fura-fila",
+  "version": "1.0.0",
+  "description": "Sistema para gestao de comandas.",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "consign": "^0.1.2",
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
+    "express-validator": "^2.21.0",
+    "mongodb": "^2.2.10",
+    "mongoose": "^4.6.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.heroku.com/fura-fila.git"
+  },
+  "keywords": [
+    "node",
+    "mongo",
+    "express"
+  ],
+  "author": "Ernando Rezende",
+  "license": "ISC"
+}
