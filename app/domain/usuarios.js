@@ -1,4 +1,46 @@
 var Usuario = require('../models/usuario');
+var jwt = require('jsonwebtoken');
+exports.autenticar = function(req, callback){
+
+	var sign = function(user) {
+		jwt.sign({email: user.email}, "12345", {
+			expiresIn: 86400 // expires in 24 hours
+		}, function(err, token) {
+
+			var usuario  = {
+				id: user._id,
+				nome: user.nome,
+				cpf: user.cpf,
+				email: user.email,
+				token: token
+			};
+
+			callback({user:usuario});
+		});
+	};
+	var email = req.jwtDecoded ? req.jwtDecoded.email : req.body.email;
+	Usuario.findOne({ "email": email }, function(err, user) {
+
+		if (err) throw err;
+
+		if (!user) {
+			callback({"errors":{email:["email não encontrado."]}});
+		} else if (user) {
+			if(req.jwtDecoded) {
+				// loga com jwt
+				sign(user)
+				return;
+			}
+
+			if (user.senha != req.body.senha) {
+				callback({"errors":{email:["senha incorreta."]}});
+			} else {
+				// loga com jwt
+				sign(user);
+			}
+		}
+	});
+};
 
 exports.save = function(usuario, callback){
 	new Usuario(usuario).save(function(error, usuario){

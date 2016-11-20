@@ -1,3 +1,5 @@
+var jwtConfig = require("../../config/jwt");
+
 module.exports = function(application) {
 
 	application.get('/usuarios', function(req, res){
@@ -9,13 +11,32 @@ module.exports = function(application) {
 	application.post('/usuarios', function(req, res){
 		
 		application.app.domain.usuarios.save(req.body, function(resp){
+			if(resp.error) {
+				return res.json(resp);
+			}
+			application.app.domain.usuarios.autenticar(req, function(resp){
+				res.json(resp);
+			});
+		});
+
+	});
+	application.post('/usuarios/login', function(req, res){
+
+		application.app.domain.usuarios.autenticar(req, function(resp){
 			res.json(resp);
 		});
 
 	});
 
+	application.get('/usuario', jwtConfig(application), function(req, res){
+
+		application.app.domain.usuarios.autenticar(req, function(resp){
+			res.json(resp);
+		});
+	})
+
 	application.delete('/usuarios/:id', function(req, res){
-		
+
 		application.app.domain.usuarios.delete(req, function(resp){
 			res.json(resp);
 		});
