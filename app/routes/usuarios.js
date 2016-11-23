@@ -20,6 +20,7 @@ module.exports = function(application) {
 		});
 
 	});
+	
 	application.post('/usuarios/login', function(req, res){
 
 		application.app.domain.usuarios.autenticar(req, function(resp){

@@ -1,12 +1,11 @@
-/**
- * Created by douglas on 19/11/16.
- */
+"use strict";
 
 const User = require("./user");
-
-class FuraFilaIO {
+const {EventEmitter} = require("events");
+class FuraFilaIO extends EventEmitter {
 
 	constructor(io) {
+		super();
 		this.io = io;
 		this.users = [];
 		this.sockets = {};

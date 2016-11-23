@@ -1,18 +1,18 @@
 "use strict";
-var express = require('express');
-var consign = require('consign');
-var bodyParser = require('body-parser');
-var expressValidator = require('express-validator');
+let express = require('express');
+let consign = require('consign');
+let bodyParser = require('body-parser');
+let expressValidator = require('express-validator');
 
-const cors = require('cors');
-const http = require('http');
-const SocketIO = require('socket.io');
+let cors = require('cors');
+let http = require('http');
+let SocketIO = require('socket.io');
 var app = express();
 
 let server = http.createServer(app);
 let io = SocketIO.listen(server);
 
-const FuraFilaIO = require('../app/socket');
+let FuraFilaIO = require('../app/socket');
 let furafila = new FuraFilaIO(io);
 
 app.use('/static', express.static(__dirname + '/node_modules'));

@@ -1,6 +1,4 @@
-/**
- * Created by douglas on 20/11/16.
- */
+"use strict";
 module.exports = (app) => function(req, res, next) {
 
     var jwt = require('jsonwebtoken');
