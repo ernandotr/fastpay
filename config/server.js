@@ -41,12 +41,13 @@ consign({
       extensions: [ '.js', '.json', '.node' ],
       loggingType: 'info'
     })
-.include('app/routes')
-.then('config/db_config.js')
-.then('app/models')
+.include('config/db_config.js')
 // .then('app/controllers')
+.then('app/models')
 .then('app/domain')
+.then('app/routes')
 .into(app);
+console.log(app);
 
 module.exports = server;
 
