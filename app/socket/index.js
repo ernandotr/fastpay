@@ -1,11 +1,10 @@
 "use strict";
 
 const User = require("./user");
-const {EventEmitter} = require("events");
-class FuraFilaIO extends EventEmitter {
+
+class FuraFilaIO {
 
 	constructor(io) {
-		super();
 		this.io = io;
 		this.users = [];
 		this.sockets = {};
