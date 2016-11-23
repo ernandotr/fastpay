@@ -33,11 +33,18 @@ app.use(function(req, res, next){
 
 app.use(expressValidator());
 
-consign()
+consign({
+      cwd: process.cwd(),
+      locale: 'pt-br',
+      logger: console,
+      verbose: true,
+      extensions: [ '.js', '.json', '.node' ],
+      loggingType: 'info'
+    })
 .include('app/routes')
 .then('config/db_config.js')
 .then('app/models')
-.then('app/controllers')
+// .then('app/controllers')
 .then('app/domain')
 .into(app);
 
