@@ -32,22 +32,24 @@ app.use(function(req, res, next){
 });
 
 app.use(expressValidator());
-
-consign({
-      cwd: process.cwd(),
-      locale: 'pt-br',
-      logger: console,
-      verbose: true,
-      extensions: [ '.js', '.json', '.node' ],
-      loggingType: 'info'
-    })
-.include('config/db_config.js')
-// .then('app/controllers')
-.then('app/models')
-.then('app/domain')
+app.app ={
+   db:require("./db_config"),
+   domain:{
+     comanda:require("../app/domain/comanda"),
+     estabelecimentos:require("../app/domain/estabelecimentos"),
+     home:require("../app/domain/home"),
+     mesas:require("../app/domain/mesas"),
+     produtos:require("../app/domain/produtos"),
+     usuarios:require("../app/domain/usuarios"),
+   }
+};
+consign()
+// .include('config/db_config.js')
+// // .then('app/controllers')
+// .then('app/models')
+// .then('app/domain')
 .then('app/routes')
 .into(app);
-console.log(app);
 
 module.exports = server;
 
