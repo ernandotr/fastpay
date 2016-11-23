@@ -24,7 +24,12 @@ app.use(express.static('./app/public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.use(cors());
+app.use(function(req, res, next){
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT,DELETE');
+	res.setHeader('Access-Control-Allow-Headers', 'content-type, Authorization');
+	next();
+});
 
 app.use(function(req, res, next){
 	req.io = io;
@@ -32,6 +37,8 @@ app.use(function(req, res, next){
 });
 
 app.use(expressValidator());
+
+//isso substitui o consign por enquanto
 app.app ={
    db:require("./db_config"),
    domain:{
@@ -45,7 +52,7 @@ app.app ={
 };
 consign()
 // .include('config/db_config.js')
-// // .then('app/controllers')
+// .then('app/controllers')
 // .then('app/models')
 // .then('app/domain')
 .then('app/routes')
