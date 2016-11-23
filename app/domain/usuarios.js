@@ -1,8 +1,10 @@
+"use strict";
 var Usuario = require('../models/usuario');
 var jwt = require('jsonwebtoken');
-exports.autenticar = function(req, callback){
 
-	var sign = function(user) {
+exports.autenticar = function(req, callback){
+    /**loga o usuario com um novo token*/
+	let signin = function(user) {
 		jwt.sign({email: user.email}, "12345", {
 			expiresIn: 86400 // expires in 24 hours
 		}, function(err, token) {
@@ -28,15 +30,15 @@ exports.autenticar = function(req, callback){
 		} else if (user) {
 			if(req.jwtDecoded) {
 				// loga com jwt
-				sign(user)
+				signin(user)
 				return;
 			}
 
 			if (user.senha != req.body.senha) {
 				callback({"errors":{email:["senha incorreta."]}});
 			} else {
-				// loga com jwt
-				sign(user);
+				// loga com senha
+				signin(user);
 			}
 		}
 	});

@@ -1,14 +1,23 @@
-var jwtConfig = require("../../config/jwt");
+"use strict";
 
 module.exports = function(application) {
+    let router = require("express").Router();
+	let jwtConfig = require("../../config/jwt");
 
-	application.get('/usuarios', function(req, res){
+	router.get('/usuario', jwtConfig(application), function(req, res){
+
+		application.app.domain.usuarios.autenticar(req, function(resp){
+			res.json(resp);
+		});
+	});
+
+	router.get('/usuarios', function(req, res){
 		application.app.domain.usuarios.list(function(resp){
 			res.json(resp);
 		});
 	});
 
-	application.post('/usuarios', function(req, res){
+	router.post('/usuarios', function(req, res){
 		
 		application.app.domain.usuarios.save(req.body, function(resp){
 			if(resp.error) {
@@ -21,7 +30,7 @@ module.exports = function(application) {
 
 	});
 	
-	application.post('/usuarios/login', function(req, res){
+	router.post('/usuarios/login', function(req, res){
 
 		application.app.domain.usuarios.autenticar(req, function(resp){
 			res.json(resp);
@@ -29,18 +38,12 @@ module.exports = function(application) {
 
 	});
 
-	application.get('/usuario', jwtConfig(application), function(req, res){
-
-		application.app.domain.usuarios.autenticar(req, function(resp){
-			res.json(resp);
-		});
-	})
-
-	application.delete('/usuarios/:id', function(req, res){
+	router.delete('/usuarios/:id', function(req, res){
 
 		application.app.domain.usuarios.delete(req, function(resp){
 			res.json(resp);
 		});
 	})
 
+    application.use(router);
 };
