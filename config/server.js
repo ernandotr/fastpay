@@ -24,7 +24,12 @@ app.use(express.static('./app/public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.use(cors());
+app.use(function(req, res, next){
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT,DELETE');
+	res.setHeader('Access-Control-Allow-Headers', 'content-type, Authorization');
+	next();
+});
 
 app.use(function(req, res, next){
 	req.io = io;
