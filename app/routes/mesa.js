@@ -21,5 +21,5 @@ module.exports = function(application) {
 			res.json(resp);
 		});
 	})
-     return mesas;
+    return router;
 };
