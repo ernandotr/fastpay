@@ -55,7 +55,7 @@ consign()
 // .then('app/controllers')
 // .then('app/models')
 // .then('app/domain')
-.then('/app/routes')
+.include('app/routes')
 .into(app);
 
 module.exports = server;
