@@ -1,12 +1,14 @@
+"use strict";
+let express = require('express');
 module.exports = function(application) {
-
-	application.get('/comandas', function(req, res){
+    let router = express.Router();
+	router.get('/comandas', function(req, res){
 		application.app.domain.comanda.list(function(resp){
 			res.json(resp);
 		});
 	});
 
-	application.post('/comandas', function(req, res){
+	router.post('/comandas', function(req, res){
 		   
 		application.app.domain.comanda.save(req.body, function(resp){
 			res.json(resp);
@@ -15,18 +17,11 @@ module.exports = function(application) {
 
 	});
 
-	application.post('/pedido', function(req, res){
-		application.app.domain.comanda.add(req, function(resp){
-			res.json(resp);
-			req.io.emit("pedido add", resp);
-		});
-	});
-
-	application.delete('/comandas/:id', function(req, res){
+	router.delete('/comandas/:id', function(req, res){
 		application.app.domain.comanda.delete(req, function(resp){
 			res.json(resp);
 			req.io.emit("comanda delete", resp);
 		});
 	})
-
+	return router;
 };

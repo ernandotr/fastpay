@@ -1,6 +1,6 @@
 "use strict";
 let express = require('express');
-let consign = require('consign');
+// let consign = require('consign');
 let bodyParser = require('body-parser');
 let expressValidator = require('express-validator');
 let cors = require('cors');
@@ -50,13 +50,29 @@ app.app ={
      usuarios:require("../app/domain/usuarios"),
    }
 };
-consign()
-.include('config/db_config.js')
-// .then('app/controllers')
-// .then('app/models')
-// .then('app/domain')
-.then('app/routes')
-.into(app);
+
+let comanda = require("../app/routes/comanda")(app);
+let pedido = require("../app/routes/pedido")(app);
+let estabelecimentos = require("../app/routes/estabelecimetos")(app);
+let home = require("../app/routes/home")(app);
+let mesas = require("../app/routes/mesa")(app);
+let produtos = require("../app/routes/produtos")(app);
+let usuarios = require("../app/routes/usuarios")(app);
+
+app.use(comanda);
+app.use(pedido);
+app.use(estabelecimentos);
+app.use(home);
+app.use(produtos);
+app.use(usuarios);
+
+// consign()
+// //.include('config/db_config.js')
+// // .then('app/controllers')
+// // .then('app/models')
+// // .then('app/domain')
+// .then('app/routes')
+// .into(app);
 
 module.exports = server;
 
