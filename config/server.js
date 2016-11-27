@@ -63,6 +63,7 @@ app.use(comanda);
 app.use(pedido);
 app.use(estabelecimentos);
 app.use(home);
+app.use(mesas);
 app.use(produtos);
 app.use(usuarios);
 
