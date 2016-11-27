@@ -51,11 +51,11 @@ app.app ={
    }
 };
 consign()
-// .include('config/db_config.js')
+.include('config/db_config.js')
 // .then('app/controllers')
 // .then('app/models')
 // .then('app/domain')
-.include('app/routes')
+.then('app/routes')
 .into(app);
 
 module.exports = server;
