@@ -3,6 +3,7 @@ let express = require('express');
 let consign = require('consign');
 let bodyParser = require('body-parser');
 let expressValidator = require('express-validator');
+let cors = require('cors');
 
 let http = require('http');
 let SocketIO = require('socket.io');
@@ -23,12 +24,7 @@ app.use(express.static('./app/public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.use(function(req, res, next){
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT,DELETE');
-	res.setHeader('Access-Control-Allow-Headers', 'content-type, Authorization');
-	next();
-});
+app.use(cors());
 
 app.use(function(req, res, next){
 	req.io = io;
