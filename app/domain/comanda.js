@@ -19,7 +19,14 @@ exports.add = function(req, callback){
 		if (error) {
 			callback({error: 'Nao foi possivel add pedido.'});
 		}else{
-			comanda.itens.push(item);
+			if(Array.isArray(item)) {
+                item.forEach(function(item){
+     				comanda.itens.push(item);
+			    });
+			} else {
+				comanda.itens.push(item);
+			}
+
 			comanda.valorTotal = 0;
 			comanda.itens.forEach(function(item){
 				comanda.valorTotal += item.valor;
