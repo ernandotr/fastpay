@@ -4,7 +4,7 @@ exports.save = function(produto, callback){
 	new Produto(produto).save(function(error, produto){
 		if(error){
 			callback({error: 'Nao foi possivel salvar.'});
-		}else{
+		} else {
 			callback(produto);
 		}
 	});

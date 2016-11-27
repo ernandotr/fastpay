@@ -4,7 +4,6 @@ let consign = require('consign');
 let bodyParser = require('body-parser');
 let expressValidator = require('express-validator');
 
-let cors = require('cors');
 let http = require('http');
 let SocketIO = require('socket.io');
 var app = express();

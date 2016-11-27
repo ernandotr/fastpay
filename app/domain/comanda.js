@@ -6,6 +6,7 @@ exports.save = function(comanda, callback){
 		if(error){
 			callback({error: 'Nao foi possivel salvar.'});
 		}else{
+			comanda.created = new Date();
 			callback(comanda);
 		}
 	});
@@ -28,6 +29,7 @@ exports.add = function(req, callback){
 				if (error) {
 					callback({error: 'Pedido nao incluido.'});
 				}else{
+					comanda.created = new Date();
 					callback(comanda);
 				}
 			});

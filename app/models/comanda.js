@@ -8,6 +8,10 @@ var ComandaSchema = new schema({
 	estabelecimento: String,
 	usuario: String,
 	mesa: String,
+	created: {
+       type: Date,
+       default: Date.now
+    },
 	valorTotal: Number,
 	itens: [new schema({codigo : Number, produto : String, valor : Number, quantidate : Number})]
 	

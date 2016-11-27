@@ -25,7 +25,8 @@ class FuraFilaIO {
 				this.sockets[currentUser.id] = socket;
 				this.users.push(currentUser);
 				socket.emit('userJoin', {
-					nome: currentUser.nome
+					nome: currentUser.nome,
+					total:this.users.length
 				});
 				console.log('[INFO] Total usuarios: ' + this.users.length);
 			}
